@@ -17,8 +17,15 @@ def main():
             cmd_name, exit_code = command.split(" ")
             if exit_code == "0":
                 sys.exit(int(exit_code))
-        sys.stdout.write(f"{command}: command not found\n")
-        sys.stdout.flush()
+        elif command.startswith("echo"):
+            cmd_name, *args = command.split(" ")
+            for word in args:
+                sys.stdout.write(f"{word} ")
+            sys.stdout.write("\n")
+            sys.stdout.flush()
+        else:
+            sys.stdout.write(f"{command}: command not found\n")
+            sys.stdout.flush()
 
 
 if __name__ == "__main__":
