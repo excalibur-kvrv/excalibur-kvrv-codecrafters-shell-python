@@ -25,6 +25,13 @@ def main():
                     sys.stdout.write(" ")
             sys.stdout.write("\n")
             sys.stdout.flush()
+        elif command.startswith("type"):
+            cmd_name, *check = command.split(" ")
+            if check in ["type", "echo", "exit"]:
+                sys.stdout.write(f"{check} is a shell builtin\n")
+            else:
+                sys.stdout.write(f"{' '.join(check)} not found\n")
+            sys.stdout.flush()
         else:
             sys.stdout.write(f"{command}: command not found\n")
             sys.stdout.flush()
