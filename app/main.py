@@ -1,9 +1,18 @@
 import sys
+import os
+
+def search_in_path(program):
+    path = os.environ.get("PATH", "")
+    if path:
+        for location in path.split(":"):
+            if os.path.isdir(location):
+                if program in os.listdir(location):
+                    return True, os.path.join(location, program)
+    return False, ""
 
 
 def main():
     # You can use print statements as follows for debugging, they'll be visible when running tests.
-
     # Uncomment this block to pass the first stage
     # sys.stdout.write("$ ")
     # sys.stdout.flush()
@@ -27,8 +36,10 @@ def main():
             sys.stdout.flush()
         elif command.startswith("type"):
             cmd_name, *check = command.split(" ")
-            if len(check) == 1 and check[0] in ["type", "echo", "exit"]:
+            if len(check) == 1 and check[0] in ["type", "echo", "exit"]: 
                 sys.stdout.write(f"{check[0]} is a shell builtin\n")
+            elif len(check) == 1 and search_in_path(check[0])[0]:
+                sys.stdout.write(f"{check[0]} is {search_in_path(check[0])[1]}\n") 
             else:
                 sys.stdout.write(f"{' '.join(check)} not found\n")
             sys.stdout.flush()
