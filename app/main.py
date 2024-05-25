@@ -41,7 +41,7 @@ def main():
             if len(check) == 1 and check[0] in ["type", "echo", "exit"]: 
                 sys.stdout.write(f"{check[0]} is a shell builtin\n")
             elif len(check) == 1 and search_in_path(check[0], False)[0]:
-                sys.stdout.write(f"{check[0]} is {search_in_path(check[0])[1]}\n") 
+                sys.stdout.write(f"{check[0]} is {search_in_path(check[0], False)[1]}\n") 
             else:
                 sys.stdout.write(f"{' '.join(check)} not found\n")
             sys.stdout.flush()
