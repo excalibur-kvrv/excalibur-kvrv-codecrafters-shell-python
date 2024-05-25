@@ -19,8 +19,10 @@ def main():
                 sys.exit(int(exit_code))
         elif command.startswith("echo"):
             cmd_name, *args = command.split(" ")
-            for word in args:
-                sys.stdout.write(f"{word} ")
+            for index, word in enumerate(args):
+                sys.stdout.write(f"{word}")
+                if index != len(args) - 1:
+                    sys.stdout.write(" ")
             sys.stdout.write("\n")
             sys.stdout.flush()
         else:
