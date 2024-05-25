@@ -1,8 +1,8 @@
 import sys
 import os
 
-def search_in_path(program):
-    if os.path.isfile(program):
+def search_in_path(program, location_return=True):
+    if os.path.isfile(program) and location_return:
         return True, program
     path = os.environ.get("PATH", "")
     if path:
@@ -40,7 +40,7 @@ def main():
             cmd_name, *check = command.split(" ")
             if len(check) == 1 and check[0] in ["type", "echo", "exit"]: 
                 sys.stdout.write(f"{check[0]} is a shell builtin\n")
-            elif len(check) == 1 and search_in_path(check[0])[0]:
+            elif len(check) == 1 and search_in_path(check[0], False)[0]:
                 sys.stdout.write(f"{check[0]} is {search_in_path(check[0])[1]}\n") 
             else:
                 sys.stdout.write(f"{' '.join(check)} not found\n")
