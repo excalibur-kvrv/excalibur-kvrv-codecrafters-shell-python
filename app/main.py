@@ -2,14 +2,14 @@ import sys
 import os
 
 def search_in_path(program):
+    if os.path.isfile(program):
+        return True, program
     path = os.environ.get("PATH", "")
     if path:
         for location in path.split(":"):
             if os.path.isdir(location):
                 if program in os.listdir(location):
                     return True, os.path.join(location, program)
-            if os.path.isfile(location):
-                return True, location
     return False, ""
 
 
