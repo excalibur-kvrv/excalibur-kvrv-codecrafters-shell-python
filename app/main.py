@@ -43,6 +43,11 @@ def main():
             else:
                 sys.stdout.write(f"{' '.join(check)} not found\n")
             sys.stdout.flush()
+        elif search_in_path(command.split(" ")[0])[0]:
+            cmd, *args = command.split(" ")
+            _, cmd_location = search_in_path(cmd)
+            sys.stdout.write(os.popen(f"{cmd_location} {' '.join(args)}").read())
+            sys.stdout.flush()
         else:
             sys.stdout.write(f"{command}: command not found\n")
             sys.stdout.flush()
