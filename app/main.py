@@ -8,6 +8,9 @@ def search_in_path(program):
             if os.path.isdir(location):
                 if program in os.listdir(location):
                     return True, os.path.join(location, program)
+            if os.path.isfile(location):
+                if program = os.path.split(location)[-1]:
+                    return True, location
     return False, ""
 
 
