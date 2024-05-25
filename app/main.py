@@ -13,6 +13,9 @@ def main():
 
         # Wait for user input
         command = input()
+        if command.startswith("exit"):
+            cmd_name, exit_code = command.split(" ")
+            sys.exit(exit_code)
         sys.stdout.write(f"{command}: command not found\n")
         sys.stdout.flush()
 
