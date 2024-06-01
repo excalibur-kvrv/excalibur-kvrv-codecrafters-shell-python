@@ -28,6 +28,8 @@ def main():
             cmd_name, exit_code = command.split(" ")
             if exit_code == "0":
                 sys.exit(int(exit_code))
+        elif command == "pwd":
+            print(os.getcwd())
         elif command.startswith("echo"):
             cmd_name, *args = command.split(" ")
             for index, word in enumerate(args):
