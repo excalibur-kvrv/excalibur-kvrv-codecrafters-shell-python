@@ -33,7 +33,9 @@ def main():
             sys.stdout.flush()
         elif command.startswith("cd"):
             cmd_name, path = command.split(" ")
-            if os.path.exists(path):
+            if path == "~":
+                os.chdir(os.getenv("HOME"))
+            elif os.path.exists(path):
                 os.chdir(path)
             else:
                 sys.stdout.write(f"{path}: No such file or directory\n")
