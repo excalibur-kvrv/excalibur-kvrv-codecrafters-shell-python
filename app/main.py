@@ -18,7 +18,10 @@ def main():
     # Uncomment this block to pass the first stage
     # sys.stdout.write("$ ")
     # sys.stdout.flush()
+    current_path = ""
     while True:
+        if os.path.exists(current_path):
+            os.chdir(current_path)
         sys.stdout.write("$ ")
         sys.stdout.flush()
 
@@ -29,7 +32,16 @@ def main():
             if exit_code == "0":
                 sys.exit(int(exit_code))
         elif command == "pwd":
-            print(os.getcwd())
+            sys.stdout.write(os.getcwd() + "\n")
+            sys.stdout.flush()
+        elif command.startswith("cd"):
+            cmd_name, path = command.split(" ")
+            if os.path.exists(path):
+                os.chdir(path)
+                current_path = path
+            else:
+                sys.stdout.write(f"cd: {path}: No such file or directory\n")
+                sys.stdout.flush()
         elif command.startswith("echo"):
             cmd_name, *args = command.split(" ")
             for index, word in enumerate(args):
@@ -40,7 +52,7 @@ def main():
             sys.stdout.flush()
         elif command.startswith("type"):
             cmd_name, *check = command.split(" ")
-            if len(check) == 1 and check[0] in ["type", "echo", "exit"]: 
+            if len(check) == 1 and check[0] in ["type", "echo", "exit", "pwd"]: 
                 sys.stdout.write(f"{check[0]} is a shell builtin\n")
             elif len(check) == 1 and search_in_path(check[0], False)[0]:
                 sys.stdout.write(f"{check[0]} is {search_in_path(check[0], False)[1]}\n") 
