@@ -18,12 +18,7 @@ def main():
     # Uncomment this block to pass the first stage
     # sys.stdout.write("$ ")
     # sys.stdout.flush()
-    current_path = ""
     while True:
-        if os.path.exists(current_path):
-            os.chdir(current_path)
-        else:
-            print(current_path)
         sys.stdout.write("$ ")
         sys.stdout.flush()
 
@@ -40,7 +35,6 @@ def main():
             cmd_name, path = command.split(" ")
             if os.path.exists(path):
                 os.chdir(path)
-                current_path = path
             else:
                 sys.stdout.write(f"cd: {path}: No such file or directory\n")
                 sys.stdout.flush()
