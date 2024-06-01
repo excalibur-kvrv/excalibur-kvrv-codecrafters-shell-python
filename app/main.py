@@ -22,6 +22,8 @@ def main():
     while True:
         if os.path.exists(current_path):
             os.chdir(current_path)
+        else:
+            print(current_path)
         sys.stdout.write("$ ")
         sys.stdout.flush()
 
