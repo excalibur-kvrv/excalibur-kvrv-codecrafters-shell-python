@@ -36,7 +36,7 @@ def main():
             if os.path.exists(path):
                 os.chdir(path)
             else:
-                sys.stdout.write(f"cd: {path}: No such file or directory\n")
+                sys.stdout.write(f"{path}: No such file or directory\n")
                 sys.stdout.flush()
         elif command.startswith("echo"):
             cmd_name, *args = command.split(" ")
